@@ -1,3 +1,5 @@
+package update;
+
 import entity.Sport;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -24,12 +26,12 @@ public class Updater extends Thread {
     private String command;
     private String port;
 
-    Updater(String p, CountDownLatch l, String c) {
+    public Updater(String p, CountDownLatch l, String c) {
         this.port = p;
         this.latch = l;
         this.command = c;
 
-        client = new ws_client("Updater thread");
+        client = new ws_client("update.Updater thread");
 
         client.addMessageHandler(message -> {
             JSONParser parser = new JSONParser();

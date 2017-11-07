@@ -1,8 +1,9 @@
 package entity;
 
 import org.json.simple.JSONObject;
-import websockets.SBCommands;
+import update.UpdateBuilder;
 
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -29,13 +30,14 @@ public class Sport {
         }
     }
 
-    public void compare(Sport s) {
+    public void compare(Sport s, String type) {
         Map<String,Region> r = s.regions;
         Set<String> keys1 = regions.keySet();
-        Set<String> keys2 = r.keySet();
+        Set<String> keys2 =  r.keySet();
         keys1.removeAll(keys2);
         if(keys1.size()>0){
-            SBCommands.DELETE.generate();
+            UpdateBuilder ub = new UpdateBuilder(type,"sport","delete");
+            ub.genDelete(keys1);
         }
     }
 }
