@@ -36,7 +36,7 @@ public class Sport {
         Set<String> keys2 =  r.keySet();
         keys1.removeAll(keys2);
         if(keys1.size()>0){
-            UpdateBuilder ub = new UpdateBuilder(type,"sport","delete");
+            UpdateBuilder ub = new UpdateBuilder(type,"region","delete");
             ub.genDelete(keys1);
         }
     }

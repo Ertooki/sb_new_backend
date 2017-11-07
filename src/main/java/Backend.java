@@ -19,7 +19,7 @@ public class Backend {
         JSONObject start = new JSONObject();
         start.put("type", "start");
 
-        Updater soccer_updater = new Updater("1",latch, BCCommands.GET_LIVE_SOCCER.toString());
+        Updater soccer_updater = new Updater("1",latch, BCCommands.GET_LIVE_SOCCER.toString(), "live");
         soccer_updater.start();
         try {
             soccer_updater.queue.put(start);

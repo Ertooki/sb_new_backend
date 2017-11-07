@@ -6,8 +6,7 @@ import org.json.simple.parser.JSONParser;
 import websockets.ws_client;
 
 import java.net.URI;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CountDownLatch;
@@ -25,11 +24,13 @@ public class Updater extends Thread {
     private CountDownLatch latch = null;
     private String command;
     private String port;
+    private String type;
 
-    public Updater(String p, CountDownLatch l, String c) {
+    public Updater(String p, CountDownLatch l, String c, String t) {
         this.port = p;
         this.latch = l;
         this.command = c;
+        this.type = t;
 
         client = new ws_client("update.Updater thread");
 
@@ -115,6 +116,29 @@ public class Updater extends Thread {
     }
 
     private void update(JSONObject sports) {
+        Map<String,Sport> newData = new ConcurrentHashMap<>();
 
+        for(String sid : (Set<String>)sports.keySet()) {
+            newData.put(sid,new Sport((JSONObject)sports.get(sid)));
+        }
+
+        List<JSONObject> updates = new ArrayList<>();
+
+        Set<String> keys1 = data.keySet();
+        Set<String> keys2 = newData.keySet();
+        keys1.removeAll(keys2);
+        if(keys1.size()>0){
+            UpdateBuilder ub = new UpdateBuilder(type,"sport","delete");
+            updates.add(ub.genDelete(keys1));
+        }
+
+        for(String sid : newData.keySet()){
+            if(data.containsKey(sid)){
+                data.get(sid).compare(newData.get(sid),type);
+            }
+            else {
+                newData.get(sid);
+            }
+        }
     }
 }
