@@ -1,0 +1,43 @@
+<div class="row_var1"
+     data-external-id="{{game.ext_id}}"
+     data-type-alias="{{type_alias}}"
+     data-type="{{game.type}}"
+     data-start="{{game.start_ts}}"
+     data-excl="{{game.excl_id}}"
+     data-sid="{{sport.id}}"
+     data-sport-name="{{sport.name}}"
+     data-sport-alias="{{sport.alias}}"
+     data-rid="{{region.id}}"
+     data-region-alias="{{region.alias}}"
+     data-cid="{{comp.id}}"
+     data-comp-name="{{comp.name}}"
+     data-gid="{{game.id}}"
+     data-alias="{{game.alias}}"
+>
+    {# Event box #}
+    {% macro div_event(market,event) %}
+        <div
+                data-bet-mid="{{market.id}}"
+                data-eid-mid="{{market.exp_id}}"
+                data-market-name="{{market.name}}"
+                data-market-type="{{market.type}}"
+                data-order-bet="{{event.order}}"
+                data-bet-id="{{event.id}}"
+                data-e-name="{{event.name}}"
+        >
+            {{event.value}}
+        </div>
+    {% endmacro %}
+
+    {# Market group #}
+    {% macro div_market(class,events,state,market_type) %}
+        <div class="{{class}}">
+            {% if state == set1 and  %}
+
+            {% endif %}
+            {% for event in events %}
+                {{div_event(event,market)}}
+            {% endfor %}
+        </div>
+    {% endmacro %}
+</div>

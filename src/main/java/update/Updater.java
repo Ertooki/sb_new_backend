@@ -113,6 +113,8 @@ public class Updater extends Thread {
             data.put(sid,new Sport((JSONObject)sports.get(sid)));
         }
 
+        this.updateFlag = true;
+        client.sendMessage(command);
     }
 
     private void update(JSONObject sports) {
@@ -123,22 +125,28 @@ public class Updater extends Thread {
         }
 
         List<JSONObject> updates = new ArrayList<>();
-
-        Set<String> keys1 = data.keySet();
-        Set<String> keys2 = newData.keySet();
+        Set<String> keys1 = new ConcurrentHashMap<>(data).keySet();
+        Set<String> keys2 = new ConcurrentHashMap<>(newData).keySet();
         keys1.removeAll(keys2);
         if(keys1.size()>0){
             UpdateBuilder ub = new UpdateBuilder(type,"sport","delete");
             updates.add(ub.genDelete(keys1));
         }
-
         for(String sid : newData.keySet()){
             if(data.containsKey(sid)){
-                data.get(sid).compare(newData.get(sid),type);
+                updates.addAll(data.get(sid).compare(newData.get(sid),type));
             }
             else {
                 newData.get(sid);
             }
         }
+
+        System.out.println(updates);
+        try {
+            sleep(15000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        client.sendMessage(command);
     }
 }

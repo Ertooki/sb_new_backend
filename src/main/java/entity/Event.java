@@ -1,6 +1,10 @@
 package entity;
 
 import org.json.simple.JSONObject;
+import update.UpdateBuilder;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Event {
 
@@ -24,12 +28,14 @@ public class Event {
         else this.value = 0.0;
         if(obj.containsKey("order")) this.order = Integer.parseInt(obj.get("order").toString());
         else this.order = 999;
-        System.out.println("\t\t\t\t\t"+id+" "+order+" "+type+" "+name+" "+value);
     }
 
-    public boolean compare(Event e){
-        if(this.value != e.value) {
+    public List<JSONObject> compare(Event e, String type){
+        List<JSONObject> updates = new ArrayList<>();
+        if(!this.value.equals(e.value)) {
+            UpdateBuilder ub = new UpdateBuilder(type, "event", "update");
+            updates.add(ub.genUpdate(this.id,"price",e.value));
         }
-        return true;
+        return updates;
     }
 }

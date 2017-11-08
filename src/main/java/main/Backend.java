@@ -1,3 +1,5 @@
+package main;
+
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.websocket.server.WebSocketHandler;
 import org.eclipse.jetty.websocket.servlet.WebSocketServletFactory;
@@ -6,9 +8,13 @@ import update.Updater;
 import websockets.BCCommands;
 import websockets.ws_server;
 
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CountDownLatch;
 
 public class Backend {
+
+    public static Map<String,Terminal> terminals = new ConcurrentHashMap<>();
 
     public static void main(String[] args){
 
