@@ -141,7 +141,8 @@ public class Updater extends Thread {
             }
         }
 
-        System.out.println(updates);
+        //
+        // System.out.println(updates);
         try {
             sleep(15000);
         } catch (InterruptedException e) {

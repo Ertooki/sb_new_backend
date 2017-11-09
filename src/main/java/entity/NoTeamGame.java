@@ -13,6 +13,7 @@ public class NoTeamGame extends Game {
 
     public NoTeamGame(JSONObject obj){
         super(obj);
+        //System.out.println(obj);
         System.out.println("NoTeam game");
     }
 

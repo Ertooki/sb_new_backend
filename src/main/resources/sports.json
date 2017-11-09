@@ -1,0 +1,15 @@
+{
+  "1": {
+    "showTime": true,
+    "markets_live": {
+      "group1": {
+        "P1XP2": ["P1","X","P2"],
+        "1HalfP1XP2": ["1HalfP1", "1HalfX", "1HalfP2"]
+      },
+      "group2": {
+        "DoubleChance": ["1X", "12", "X2"],
+
+      }
+    }
+  }
+}
