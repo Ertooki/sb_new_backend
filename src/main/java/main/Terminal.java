@@ -17,7 +17,6 @@ public class Terminal extends Thread {
     String sbid;
     String multi;
 
-    @Getter
     Session session;
 
     CountDownLatch latch;
@@ -31,7 +30,6 @@ public class Terminal extends Thread {
 
     public Map<String,JSONObject> updates = new ConcurrentHashMap<>();
 
-    @Getter
     public BlockingQueue<JSONObject> queue = new LinkedBlockingQueue<>();
 
     public Terminal(String id, String sbid, List<String> bets, String gid, String m, Session s){
@@ -41,6 +39,14 @@ public class Terminal extends Thread {
         this.active_gid = gid;
         this.multi = m;
         this.session = s;
+    }
+
+    public synchronized Session getSession(){
+        return session;
+    }
+
+    public synchronized BlockingQueue<JSONObject> getQueue(){
+        return queue;
     }
 
     public synchronized void setCount (int n) {

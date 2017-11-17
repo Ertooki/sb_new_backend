@@ -36,7 +36,7 @@ public class Game {
         else this.markets_count = 0;
         this.type = Integer.parseInt(obj.get("type").toString());
         if (obj.containsKey("exclude_ids") && obj.get("exclude_ids") != null) this.exclude_ids = obj.get("exclude_ids");
-
+        System.out.println("\tGame: "+id);
         JSONObject mkts = (JSONObject)obj.get("market");
         for(String mid : (Set<String>)mkts.keySet()){
             markets.put(mid,new Market((JSONObject)mkts.get(mid)));

@@ -113,8 +113,8 @@ public class Updater extends Thread {
             data.put(sid,new Sport((JSONObject)sports.get(sid)));
         }
 
-        this.updateFlag = true;
-        client.sendMessage(command);
+        /*this.updateFlag = true;
+        client.sendMessage(command);*/
     }
 
     private void update(JSONObject sports) {

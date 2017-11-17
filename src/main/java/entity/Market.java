@@ -36,7 +36,7 @@ public class Market {
         else this.base = 0.0;
         if(obj.containsKey("order")) this.order = Integer.parseInt(obj.get("order").toString());
         else this.order = 999;
-        if(type == "OverUnder") System.out.println(id+" "+type+" "+base);
+        System.out.println("\t\t"+id+" "+type+" "+base);
         JSONObject evnts = (JSONObject)obj.get("event");
         for(String eid : (Set<String>)evnts.keySet()){
             events.put(eid,new Event((JSONObject) evnts.get(eid)));
